@@ -22,7 +22,18 @@ def type_cellule(cell: dict) -> bool:
 
 def isContenuCorrect(n: int) -> bool:
     res = False
-    if type(n) == int:
-        if 0 <= n <= 8 or n == const.ID_MINE:
-            res = True
+    if type(n) == int and (0 <= n <= 8 or n == const.ID_MINE):
+        res = True
     return res
+
+
+def construireCellule(c=0,v=False)-> dict:
+    dico = {}
+    if c != const.ID_MINE and 0 > c or 8 < c:
+        raise ValueError(f'construireCellule : le contenu {c} n’est pas correct')
+    if not isinstance(v, bool):
+        raise TypeError(f'construireCellule : le second paramètre {type(v)} n’est pas un booléen')
+    dico['Contenu'] = c
+    dico['Visible'] = v
+    return dico
+
