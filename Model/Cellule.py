@@ -22,18 +22,61 @@ def type_cellule(cell: dict) -> bool:
 
 def isContenuCorrect(n: int) -> bool:
     res = False
-    if type(n) == int and (0 <= n <= 8 or n == const.ID_MINE):
-        res = True
+    if isinstance(n, int):
+        if not (n != const.ID_MINE and 0 > n or 8 < n):
+            res = True
     return res
 
 
-def construireCellule(c=0,v=False)-> dict:
+def construireCellule(valeur: int = 0, visible: bool = False) -> dict:
+    if valeur != const.ID_MINE and 0 > valeur or 8 < valeur:
+        raise ValueError(f"construireCellule : le contenu {valeur} n'est pas correct")
+    if not isinstance(visible, bool):
+        raise TypeError(f"construireCellule : le second paramètre {type(visible)} n'est pas un booléen")
     dico = {}
-    if c != const.ID_MINE and 0 > c or 8 < c:
-        raise ValueError(f'construireCellule : le contenu {c} n’est pas correct')
-    if not isinstance(v, bool):
-        raise TypeError(f'construireCellule : le second paramètre {type(v)} n’est pas un booléen')
-    dico['Contenu'] = c
-    dico['Visible'] = v
+    dico['Contenu'] = valeur
+    dico['Visible'] = visible
     return dico
+
+
+def getContenuCellule(dico: dict) -> int:
+    if not type_cellule(dico):
+        raise TypeError(f"getContenuCellule : Le paramètre n'est pas une cellule")
+    return dico.get('Contenu')
+
+
+def isVisibleCellule(dico: dict) -> bool:
+    if not type_cellule(dico):
+        raise TypeError(f"isVisibleCellule : Le paramètre n'est pas une cellule")
+    return dico['Visible']
+
+
+def setContenuCellule(dico: dict, contenu: int) -> None:
+    if not type_cellule(dico):
+        raise TypeError(f"setContenuCellule : Le premier paramètre n'est pas une cellule")
+    if not type(contenu) == int:
+        raise TypeError(f"setContenuCellule : Le second paramètre n'est pas un entier")
+    if not isContenuCorrect(contenu):
+        raise ValueError(f"setContenuCellule : La valeur du contenu {contenu} n'est pas correcte")
+    dico['Contenu'] = contenu
+    return None
+
+
+def setVisibleCellule(dico: dict, visible: bool) -> None:
+    if not type_cellule(dico):
+        raise TypeError(f"setVisibleCellule : Le premier paramètre n'est pas une cellule")
+    if not isinstance(visible,bool):
+        raise TypeError(f"setVisibleCellule : Le second paramètre n'est pas un booléen")
+    dico['Visible'] = visible
+    return None
+
+
+def contientMineCellule(dico: dict) -> bool:
+    res = False
+    if not type_cellule(dico):
+        raise TypeError("contientMineCellule : Le paramètre n'est pas une cellule")
+    if dico['Contenu'] == const.ID_MINE:
+        res = True
+    return res
+
 
