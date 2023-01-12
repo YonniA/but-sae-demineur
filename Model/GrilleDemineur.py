@@ -98,7 +98,53 @@ def isCoordonneeCorrecte(grille: list, coord: tuple) -> bool:
 
 def getCelluleGrilleDemineur(grille: list, coord: tuple) -> dict:
     if not type_grille_demineur(grille) or type(coord) != tuple:
-        raise TypeError(f"getCelluleGrilleDemineur : un des paramètres n’est pas du bon type.")
+        raise TypeError(f"getCelluleGrilleDemineur : Un des paramètres n’est pas du bon type.")
     if not isCoordonneeCorrecte(grille, coord):
-        raise IndexError(f"getCelluleGrilleDemineur : coordonnée non contenue dans la grille.")
+        raise IndexError(f"getCelluleGrilleDemineur : Coordonnée non contenue dans la grille.")
     return grille[coord[0]][coord[1]]
+
+
+def getContenuGrilleDemineur(grille: list, coord: tuple) -> int:
+    if not type_grille_demineur(grille) or type(coord) != tuple:
+        raise TypeError(f"getContenuGrilleDemineur : Un des paramètres n'est pas du bon type.")
+    if not isCoordonneeCorrecte(grille, coord):
+        raise IndexError(f"getContenuGrilleDemineur : Coordonnée non contenue dans la grille.")
+    return getContenuCellule(getCelluleGrilleDemineur(grille, coord))
+
+
+def setContenuGrilleDemineur(grille: list, coord: tuple, contenu: int) -> None:
+    if not type_grille_demineur(grille) or type(coord) != tuple or type(contenu) != int:
+        raise TypeError(f"setContenuGrilleDemineur : Un des paramètres n'est pas du bon type.")
+    if not isContenuCorrect(contenu):
+        raise ValueError(f"setContenuGrilleDemineur : La valeur du contenu {contenu} n'est pas correcte.")
+    if not isCoordonneeCorrecte(grille, coord):
+        raise IndexError(f"setContenuGrilleDemineur : Coordonnée non contenue dans la grille.")
+    setContenuCellule(getCelluleGrilleDemineur(grille, coord), contenu)
+    return None
+
+
+def isVisibleGrilleDemineur(grille: list, coord: tuple) -> bool:
+    if not type_grille_demineur(grille) or type(coord) != tuple:
+        raise TypeError(f"isVisibleGrilleDemineur : Un des paramètres n'est pas du bon type.")
+    if not isCoordonneeCorrecte(grille, coord):
+        raise IndexError(f"isVisibleGrilleDemineur : Coordonnée non contenue dans la grille.")
+    return isVisibleCellule(getCelluleGrilleDemineur(grille, coord))
+
+
+def setVisibleGrilleDemineur(grille: list, coord: tuple, visible: bool) -> None:
+    if not type_grille_demineur(grille) or type(coord) != tuple:
+        raise TypeError(f"setVisibleGrilleDemineur : Un des paramètres n'est pas du bon type.")
+    if not isCoordonneeCorrecte(grille, coord):
+        raise IndexError(f"setVisibleGrilleDemineur : Coordonnée non contenue dans la grille.")
+    setVisibleCellule(getCelluleGrilleDemineur(grille, coord), visible)
+    return None
+
+
+def contientMineGrilleDemineur(grille: list, coord: tuple) -> bool:
+    if not type_grille_demineur(grille) or type(coord) != tuple:
+        raise TypeError(f"contientMineGrilleDemineur : Un des paramètres n'est pas bon.")
+    if not isCoordonneeCorrecte(grille, coord):
+        raise IndexError(f"contientMineGrilleDemineur : Coordonnée non contenue dans la grille.")
+    return contientMineCellule(getCelluleGrilleDemineur(grille, coord))
+
+
