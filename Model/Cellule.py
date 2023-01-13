@@ -88,11 +88,7 @@ def isAnnotationCorrecte(annot: str) -> bool:
     return res
 
 
-"""def getAnnotationCellule(cell: dict) -> str:
+def getAnnotationCellule(cell: dict) -> str:
     if not type_cellule(cell):
         raise TypeError(f"getAnnotationCellule : Le paramètre n'est pas une cellule.")
-    if const.ANNOTATION in cell:
-        res = cell.get[const.ANNOTATION]
-    else:
-        res = None
-    return res"""
+    return cell.get(const.ANNOTATION)
