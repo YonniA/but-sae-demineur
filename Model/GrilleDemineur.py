@@ -210,9 +210,26 @@ def getAnnotationGrilleDemineur(grille: list, coord: tuple) -> int:
 
 
 def getMinesRestantesGrilleDemineur(grille: list) -> int:
+    if not type_grille_demineur(grille):
+        raise ValueError(f"getMinesRestantesGrilleDemineur : Le paramètre n'est pas une grille.")
     nb = 0
     for i in range(getNbLignesGrilleDemineur(grille)):
         for j in range(getNbColonnesGrilleDemineur(grille)):
             if getAnnotationGrilleDemineur(grille, (i, j)) == const.FLAG:
                 nb = nb + 1
     return getNbMinesGrilleDemineur(grille) - nb
+
+
+def gagneGrilleDemineur(grille: list) -> bool:
+    if not type_grille_demineur(grille):
+        raise ValueError(f"gagneGrilleDemineur : Le paramètre n'est pas une grille.D")
+    res = True
+    for i in range(getNbLignesGrilleDemineur(grille)):
+        for j in range(getNbColonnesGrilleDemineur(grille)):
+            if contientMineGrilleDemineur(grille, (i, j)) == False:
+                if isVisibleGrilleDemineur(grille, (i, j)) == False:
+                    res = False
+            else:
+                if isVisibleGrilleDemineur(grille, (i, j)) == True:
+                    res = False
+    return res
