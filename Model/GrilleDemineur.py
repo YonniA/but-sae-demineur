@@ -245,3 +245,12 @@ def perduGrilleDemineur(grille: list) -> bool:
                 if isVisibleGrilleDemineur(grille, (i, j)) == True:
                     res = True
     return res
+
+
+def reinitialiserGrilleDemineur(grille: list) -> None:
+    if not type_grille_demineur(grille):
+        raise ValueError(f"reinitialiserGrilleDemineur : Le paramètre n'est pas une grille.")
+    for i in range(getNbLignesGrilleDemineur(grille)):
+        for j in range(getNbColonnesGrilleDemineur(grille)):
+            reinitialiserCellule(getCelluleGrilleDemineur(grille, (i, j)))
+    return None

@@ -104,3 +104,8 @@ def changeAnnotationCellule(cell : dict) -> None:
         x2 = 0
     cell[const.ANNOTATION] = n[x2]
     return None
+
+
+def reinitialiserCellule(cell: dict) -> None:
+    cell= construireCellule()
+    return None
