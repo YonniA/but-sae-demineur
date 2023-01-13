@@ -178,20 +178,32 @@ def placerMinesGrilleDemineur(grille: list, nb: int, coord: tuple) -> None:
     return None
 
 
-"""def compterMinesVoisinesGrilleDemineur(grille: list):
-    if not type_grille_demineur(grille):
-        raise TypeError(f"compterMinesVoisinesGrilleDemineur : Le paramètre n'est pas une grille.")
-    """
+def compterMinesVoisinesGrilleDemineur(grille: list) -> None:
+    for i in range(getNbLignesGrilleDemineur(grille)):
+        for j in range(getNbColonnesGrilleDemineur(grille)):
+            if contientMineGrilleDemineur(grille, (i, j)) == False:
+                nb = 0
+                tmp = getCoordonneeVoisinsGrilleDemineur(grille, (i, j))
+                for k in range(len(tmp)):
+                    if contientMineGrilleDemineur(grille, tmp[k]) == True:
+                        nb = nb+1
+    return None
 
 
 def getNbMinesGrilleDemineur(grille: list) -> int:
     if not type_grille_demineur(grille):
         raise ValueError(f"getNbMinesGrilleDemineur : Le paramètre n'est pas une grille.")
     n = 0
-    for i in range(len(grille)):
-        for j in range(len(grille[i])):
+    for i in range(getNbLignesGrilleDemineur(grille)):
+        for j in range(getNbColonnesGrilleDemineur(grille)):
             if contientMineGrilleDemineur(grille, (i, j)):
                 n += 1
     return n
 
 
+def getAnnotationGrilleDemineur(grille: list, coord: tuple) -> int:
+    if not type_grille_demineur(grille) or not type_coordonnee(coord):
+        raise TypeError(f"getAnnotationGrilleDemineur : Un des paramètres n'est pas du bon type.")
+    if not isCoordonneeCorrecte(grille, coord):
+        raise IndexError(f"getAnnotationGrilleDemineur : Coordonnée non contenue dans la grille.")
+    return getAnnotationCellule(getCelluleGrilleDemineur(grille, coord))
