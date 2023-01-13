@@ -178,7 +178,7 @@ def placerMinesGrilleDemineur(grille: list, nb: int, coord: tuple) -> None:
     return None
 
 
-def compterMinesVoisinesGrilleDemineur(grille: list) -> None:
+"""def compterMinesVoisinesGrilleDemineur(grille: list) -> None:
     for i in range(getNbLignesGrilleDemineur(grille)):
         for j in range(getNbColonnesGrilleDemineur(grille)):
             if contientMineGrilleDemineur(grille, (i, j)) == False:
@@ -187,7 +187,7 @@ def compterMinesVoisinesGrilleDemineur(grille: list) -> None:
                 for k in range(len(tmp)):
                     if contientMineGrilleDemineur(grille, tmp[k]) == True:
                         nb = nb+1
-    return None
+    return None"""
 
 
 def getNbMinesGrilleDemineur(grille: list) -> int:
@@ -207,3 +207,12 @@ def getAnnotationGrilleDemineur(grille: list, coord: tuple) -> int:
     if not isCoordonneeCorrecte(grille, coord):
         raise IndexError(f"getAnnotationGrilleDemineur : Coordonnée non contenue dans la grille.")
     return getAnnotationCellule(getCelluleGrilleDemineur(grille, coord))
+
+
+def getMinesRestantesGrilleDemineur(grille: list) -> int:
+    nb = 0
+    for i in range(getNbLignesGrilleDemineur(grille)):
+        for j in range(getNbColonnesGrilleDemineur(grille)):
+            if getAnnotationGrilleDemineur(grille, (i, j)) == const.FLAG:
+                nb = nb + 1
+    return getNbMinesGrilleDemineur(grille) - nb
