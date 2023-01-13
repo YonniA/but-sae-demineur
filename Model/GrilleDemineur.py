@@ -176,3 +176,22 @@ def placerMinesGrilleDemineur(grille: list, nb: int, coord: tuple) -> None:
             e.append((x, y))
             i += 1
     return None
+
+
+"""def compterMinesVoisinesGrilleDemineur(grille: list):
+    if not type_grille_demineur(grille):
+        raise TypeError(f"compterMinesVoisinesGrilleDemineur : Le paramètre n'est pas une grille.")
+    """
+
+
+def getNbMinesGrilleDemineur(grille: list) -> int:
+    if not type_grille_demineur(grille):
+        raise ValueError(f"getNbMinesGrilleDemineur : Le paramètre n'est pas une grille.")
+    n = 0
+    for i in range(len(grille)):
+        for j in range(len(grille[i])):
+            if contientMineGrilleDemineur(grille, (i, j)):
+                n += 1
+    return n
+
+
