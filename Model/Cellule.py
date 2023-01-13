@@ -36,6 +36,7 @@ def construireCellule(valeur: int = 0, visible: bool = False) -> dict:
     dico = {}
     dico[const.CONTENU] = valeur
     dico[const.VISIBLE] = visible
+    dico[const.ANNOTATION] = None
     return dico
 
 
@@ -80,3 +81,8 @@ def contientMineCellule(dico: dict) -> bool:
     return res
 
 
+def isAnnotationCorrecte(annot: str) -> bool:
+    res = False
+    if annot == None or annot == const.DOUTE or annot == const.FLAG:
+        res = True
+    return res
