@@ -222,7 +222,7 @@ def getMinesRestantesGrilleDemineur(grille: list) -> int:
 
 def gagneGrilleDemineur(grille: list) -> bool:
     if not type_grille_demineur(grille):
-        raise ValueError(f"gagneGrilleDemineur : Le paramètre n'est pas une grille.D")
+        raise ValueError(f"gagneGrilleDemineur : Le paramètre n'est pas une grille.")
     res = True
     for i in range(getNbLignesGrilleDemineur(grille)):
         for j in range(getNbColonnesGrilleDemineur(grille)):
@@ -232,4 +232,16 @@ def gagneGrilleDemineur(grille: list) -> bool:
             else:
                 if isVisibleGrilleDemineur(grille, (i, j)) == True:
                     res = False
+    return res
+
+
+def perduGrilleDemineur(grille: list) -> bool:
+    if not type_grille_demineur(grille):
+        raise ValueError(f"perduGrilleDemineur : Le paramètre n'est pas une grille.")
+    res = False
+    for i in range(getNbLignesGrilleDemineur(grille)):
+        for j in range(getNbColonnesGrilleDemineur(grille)):
+            if contientMineGrilleDemineur(grille, (i, j)) == True:
+                if isVisibleGrilleDemineur(grille, (i, j)) == True:
+                    res = True
     return res
